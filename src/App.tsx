@@ -17,24 +17,25 @@ type RawPokemon = {
   abilities: Array<{
     is_hidden: boolean
     ability: {
-      name: string
+      name: string // ex: 'overgrow'
     }
   }>
   sprites: {
     other: {
       'official-artwork': {
-        front_default: string
+        front_default: string // imageUrl
       }
     }
   }
   stats: Array<{
     base_stat: number
     stat: {
-      name: string
+      name: string // ex: 'hp'
     }
   }>
 }
 
+// documentation available at: https://pokeapi.co
 const fetchPokemonByName = (name: string) =>
   fetch(`https://pokeapi.co/api/v2/pokemon/${name}`).then((response) => {
     if (!response.ok) {
@@ -49,6 +50,7 @@ type Pokemon = {
   id: number
   name: string
   hp: number
+  // string array of ability names where `is_hidden` is `false`
   visibleAbilityNames: Array<string>
   imageUrl: string
 }
@@ -59,8 +61,8 @@ type CaughtPokemon = Pokemon & {
   caught: true
 }
 
-// use this function to transform the RawPokemon data into the Pokemon type
-const pokemonFromRawPokemon = (rawPokemon: RawPokemon) => {}
+// use this function to transform the data from RawPokemon -> Pokemon
+const pokemonFromRawPokemon = () => {}
 
 // use this function to "catch" the transformed `Pokemon` by adding the `caught`
 // property
@@ -73,6 +75,8 @@ export const App = () => {
     // fetch, transform, catch, and set the Pokemon state here
   }, [])
 
+  // blurb / filler content
+  // Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   return <h1>Pokemon ({pokemon.length})</h1>
 }
 
